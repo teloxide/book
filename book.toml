@@ -1,6 +1,8 @@
 [book]
-authors = ["Maybe Waffle"]
+title = "Teloxide user guide"
 language = "en"
 multilingual = false
 src = "src"
-title = "Teloxide user guide"
+
+[output.html]
+git-repository-url = "https://github.com/teloxide/book"
