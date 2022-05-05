@@ -138,4 +138,6 @@ teloxide::repl(bot, |message: Message, bot: AutoSend<Bot>| async move {
 ![Bot repeating every message after the author.](./img/ch-02-pic-02.png)
 
 To stop the bot running in a `repl`, you can press `ctrl` + `C`.
-Note that it can take some time to stop the bot.
+Note that it can take some time to stop the bot:
+
+![`cargo run` is executed in a console and then Ctrl+C is immediately pressed, but the bot doesn't stop for 20-30 seconds](./img/ch-02-pic-03.gif)
