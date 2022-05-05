@@ -11,14 +11,14 @@ When in previous chapters we've called `send_message`, the method came from a tr
 [adaptors]: https://docs.rs/teloxide/latest/teloxide/adaptors/index.html
 
 ```rust,no_run
-use teloxide::prelude2::*;
+use teloxide::prelude::{*, ChatId};
 
 # #[tokio::main]
 # async fn main() -> Result<(), Box<dyn std::error::Error>> {
 #     let bot = Bot::new("TOKEN").auto_send();
 # 
 #     // replace 0 with your user id
-#     let your_id = 0;
+#     let your_id = ChatId(0);
 bot
     .send_message(your_id, "Hi!")
     .await?;   
@@ -30,14 +30,14 @@ bot
 `send_message` has optional parameters that can be provided like this:
 
 ```rust,no_run
-use teloxide::prelude2::*;
+use teloxide::prelude::*;
 
 # #[tokio::main]
 # async fn main() -> Result<(), Box<dyn std::error::Error>> {
 #     let bot = Bot::new("TOKEN").auto_send();
 # 
 #     // replace 0 with your user id
-#     let your_id = 0;
+#     let your_id = ChatId(0);
 bot
     .send_message(your_id, "Hi!")
     .protect_content(true) // <-- optional parameter!
