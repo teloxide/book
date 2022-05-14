@@ -1,0 +1,539 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Teloxide user guide</title>
+        <meta name="robots" content="noindex" />
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="ch-00-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="ch-01-creating-bot.html"><strong aria-hidden="true">1.</strong> Creating bot with BotFather</a></li><li class="chapter-item expanded "><a href="ch-02-writing-bot.html"><strong aria-hidden="true">2.</strong> Writing your first bot with teloxide</a></li><li class="chapter-item expanded "><a href="ch-03-logging.html"><strong aria-hidden="true">3.</strong> Logging</a></li><li class="chapter-item expanded "><a href="ch-04-sending-requests.html"><strong aria-hidden="true">4.</strong> Sending requests</a></li><li class="chapter-item expanded "><a href="ch-05-bot-adaptors.html"><strong aria-hidden="true">5.</strong> Bot adaptors</a></li><li class="chapter-item expanded "><a href="ch-06-update-dispatching.html"><strong aria-hidden="true">6.</strong> Update dispatching</a></li><li class="chapter-item expanded "><a href="appendix--.html"><strong aria-hidden="true">7.</strong> Appendix</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-a-teloxide-core.html"><strong aria-hidden="true">7.1.</strong> A - teloxide-core</a></li><li class="chapter-item expanded "><a href="appendix-b-update-listeners.html"><strong aria-hidden="true">7.2.</strong> B - Update listeners</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Teloxide user guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/teloxide/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p><strong>Note: this book is very much work in progress. Use with caution.</strong></p>
+<p>This book is a user-guide for the <a href="https://github.com/teloxide/teloxide">teloxide</a> Rust library.
+Teloxide is a full-featured framework that empowers you to easily build Telegram bots using Rust.
+It handles all the difficult stuff so you can focus only on your business logic.</p>
+<p>This book will guide you through creating and writing your bot with teloxide and teach you how to use different teloxide features.</p>
+<blockquote>
+<p>Note: teloxide uses <a href="https://core.telegram.org/bots/api">Telegram Bot API</a> under the hood, if you want to write mtproto-bots, you need a different library.
+For example: <a href="https://github.com/Lonami/grammers">gramme.rs</a>.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-bot-with-botfather"><a class="header" href="#creating-bot-with-botfather">Creating bot with BotFather</a></h1>
+<blockquote>
+<p>Note: if you already know how to create a bot with BotFather, you can skip this chapter.
+There is nothing teloxide-specific in this.</p>
+</blockquote>
+<p>To create a Telegram bot, you need to use <a href="https://t.me/BotFather">@BotFather</a>.
+Bot Father is a bot itself, that provides commands to manage your bots.
+To create a new bot, use <code>/newbot</code> and then answer questions from Bot Father.</p>
+<p><img src="./img/ch-01-pic-01.png" alt="Dialog in telegram. Author: /newbot. BotFather: Alright, a new bot. How are we going to call it? Please choose a name for your bot. Author: My first bot w/ teloxide" /></p>
+<p>The first question is bot name.
+This is what you'll later see at the top of the chat with your bot.
+The name can easily be changed later, so there is nothing to worry about.</p>
+<p><img src="./img/ch-01-pic-02.png" alt="Dialog in telegram. BotFather: Good. Now let's choose a username for your bot. It must end in bot. Like this, for example: TetrisBot or tetris_bot. Author: b16d9e2bb44a4b728_bot. BotFather: Done! Congratulations on your new bot. You will find it at t.me/b16d9e2bb44a4b728_bot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this. Use this token to access the HTTP API: 5284707973:AAEABD5lZTJ7XKqXOUnoH9tTYPDr796u4HA Keep your token secure and store it safely, it can be used by anyone to control your bot. For a description of the Bot API, see this page: https://core.telegram.org/bots/api" /></p>
+<p>The second question is the bot's username, ie the @-tag with which you'll be able to mention the bot.
+The username can contain a-z, A-Z, 0-9 and <code>_</code> characters and must end in a <code>bot</code> (case insensitive).
+This is much more important that the name, since you can't ever change the username of the bot.
+Choose wisely.</p>
+<p>The &quot;token to access the HTTP API&quot; is the <em>bot token</em> that will be used to control bot with teloxide.
+As Bot Father mentions, you need to keep the token in secret, since it can be user by anyone.</p>
+<p>In case the token somehow leaked you can change it via Bot Father.
+Use <code>/mybots</code> command, then choose the bot, click &quot;API token&quot; and click &quot;Revoke current token&quot;:</p>
+<p><img src="./img/ch-01-pic-03.gif" alt="Video of revoking bot token. The author uses /mybots command and then clicks @&lt;bot username&gt; -&gt; API token -&gt; revoke current token" /></p>
+<p>There are a lot of things that you can change about your bot (eg profile picture) via <code>/mybots</code> command.
+You may want to check them yourself.</p>
+<p>Some settings that affect bot capabilities:</p>
+<ul>
+<li>Bot Settings
+<ul>
+<li>Inline Mode (allows to use bot in any chat by typing <code>@username_of_the_bot ...</code>)</li>
+<li>Allow Groups? (you can disallow addition of the bot to groups)</li>
+<li>Group privacy (see <a href="https://core.telegram.org/bots#privacy-mode">privacy mode</a>)</li>
+<li>Payments (allows to accept payments through bot)</li>
+<li>Domain (allows to you to use telegram to identify users on your site)</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="writing-your-first-bot-with-teloxide"><a class="header" href="#writing-your-first-bot-with-teloxide">Writing your first bot with teloxide</a></h1>
+<p>In order to use teloxide you first need to create a Rust project with <a href="https://doc.rust-lang.org/cargo/"><code>cargo</code></a>:</p>
+<pre><code class="language-shell">$ cargo new my-first-bot --bin
+</code></pre>
+<blockquote>
+<p>Note: this book assumes that you already have basic knowledge of Rust and have <code>cargo</code> installed.
+If you don't have it, we recommend reading <a href="https://doc.rust-lang.org/book/">The Rust Book</a>.</p>
+</blockquote>
+<p>Teloxide is an async library, so in order to use it you need an async runtime like <a href="http://tokio.rs"><code>tokio</code></a>.
+Add <code>tokio</code> and <code>teloxide</code> dependencies to <code>Cargo.toml</code> generated by <code>cargo new</code>:</p>
+<pre><code class="language-toml"># Cargo.toml
+
+[dependencies]
+tokio = { version = &quot;1.17&quot;, features = [&quot;rt-multi-thread&quot;, &quot;macros&quot;] }
+teloxide = &quot;0.9&quot;
+</code></pre>
+<blockquote>
+<p>Note: teloxide currently requires <code>tokio</code> and won't work with other runtimes.</p>
+</blockquote>
+<p>Now you can start writing your bot.
+First, you'll need to create an async entry point to the program:</p>
+<pre><pre class="playground"><code class="language-rust no_run">// This is needed to run `async` main function via tokio runtime
+#[tokio::main]
+// Returning result from main allows for easier error handling
+async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+    // ...
+    Ok(())
+}
+</code></pre></pre>
+<p>Then, you can create a bot using <a href="https://docs.rs/teloxide/latest/teloxide/struct.Bot.html#method.new"><code>Bot::new</code></a> and <code>auto_send</code> extension
+(we'll cover what <code>auto_send</code> does in later chapters):</p>
+<pre><pre class="playground"><code class="language-rust no_run">use teloxide::prelude::*;
+
+<span class="boring">#[tokio::main]
+</span><span class="boring">async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+</span><span class="boring">
+</span>// Replace TOKEN with the token you've got when creating the bot
+let bot = Bot::new(&quot;TOKEN&quot;).auto_send();
+<span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>Then, try sending yourself a message:</p>
+<pre><pre class="playground"><code class="language-rust no_run"><span class="boring">use teloxide::{prelude::*, ChatId};
+</span><span class="boring">#[tokio::main]
+</span><span class="boring">async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+</span><span class="boring">    let bot = Bot::new(&quot;TOKEN&quot;).auto_send();
+</span><span class="boring">
+</span>// replace 0 with your user id
+let your_id = ChatId(0);
+bot
+    .send_message(your_id, &quot;Hi!&quot;)
+    // `.await` is needed to wait for an async operation
+    // `?` propagates possible errors
+    .await?;   
+<span class="boring"> 
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p>Note: you can get your id from <a href="https://t.me/ShowJsonBot">@ShowJsonBot</a> (message -&gt; from -&gt; id).</p>
+</blockquote>
+<blockquote>
+<p>Note: Telegram bots can't initiate a dialog, so you need to write to the bot first.</p>
+</blockquote>
+<p>Now you can run the bot and it should send you a &quot;Hi!&quot; message:</p>
+<p><img src="./img/ch-02-pic-01.gif" alt="cargo run is executed in a console and then the bot sends a &quot;Hi!&quot; message" /></p>
+<h2 id="managing-bot-token"><a class="header" href="#managing-bot-token">Managing bot token</a></h2>
+<p>Keeping the bot token in source code is not a good idea for multiple reasons:</p>
+<ol>
+<li>every time you'll want to change the token (e.g. to move from the test bot to a production one) you'd need to recompile the program</li>
+<li>It's easy to accidentally commit the token that is inside the source code into a VCS like git</li>
+</ol>
+<p>Instead, you normally either pass the token as a command line argument or via environment variables.
+For the latter teloxide provides a handy <code>Bot</code> constructor -- <a href="https://docs.rs/teloxide/latest/teloxide/struct.Bot.html#method.from_env"><code>Bot::from_env</code></a>.
+It gets the token from the <code>TELOXIDE_TOKEN</code> environment variable.</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span><span class="boring">use teloxide::prelude::*;
+</span>let bot = Bot::from_env().auto_send();
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="reacting-to-users"><a class="header" href="#reacting-to-users">Reacting to users</a></h2>
+<p>A bot that just sends messages may be all you need, but often you want to react to the user's input.
+For this <code>teloxide</code> provides a variety of constructs.
+The simplest option to process user's input is called &quot;repl&quot;.</p>
+<p>To use it you just need to provide a bot and a function to it.
+Then, the function will be executed on each message from the user:</p>
+<pre><pre class="playground"><code class="language-rust no_run"><span class="boring">use teloxide::prelude::*;
+</span><span class="boring">#[tokio::main]
+</span><span class="boring">async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+</span><span class="boring">    let bot = Bot::new(&quot;TOKEN&quot;).auto_send();
+</span><span class="boring">
+</span>teloxide::repl(bot, |message: Message, bot: AutoSend&lt;Bot&gt;| async move {
+    // There are non-text messages, so we need to use pattern matching
+    if let Some(text) = message.text() {
+        // Echo text back into the chat
+        bot.send_message(message.chat.id, text).await?;
+    }
+
+    // respond is an alias to `Ok()` with a error type compatible with teloxide
+    respond(())
+}).await;
+<span class="boring"> 
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre></pre>
+<p><img src="./img/ch-02-pic-02.png" alt="Bot repeating every message after the author." /></p>
+<p>To stop the bot running in a <code>repl</code>, you can press <code>ctrl</code> + <code>C</code>.
+Note that it can take some time to stop the bot:</p>
+<p><img src="./img/ch-02-pic-03.gif" alt="cargo run is executed in a console and then Ctrl+C is immediately pressed, but the bot doesn't stop for 20-30 seconds" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="logging"><a class="header" href="#logging">Logging</a></h1>
+<p>Teloxide uses the <a href="https://lib.rs/crates/log"><code>log</code></a> facade crate.
+It may be a good idea to add a logging implementation, so you can see logs from teloxide or use logging yourself.</p>
+<p>There are a lot of logging implementations (see <a href="https://docs.rs/log/latest/log/#in-executables"><code>log</code> documentation</a>) to choose from, but as a start you can try <a href="https://lib.rs/crates/pretty_env_logger"><code>pretty_env_logger</code></a>.
+For this add a dependency to <code>Cargo.toml</code>:</p>
+<pre><code class="language-toml">pretty_env_logger = &quot;0.4&quot;
+</code></pre>
+<p>And call the init function somewhere near the beginning of the <code>main</code> function:</p>
+<pre><pre class="playground"><code class="language-rust no_run"><span class="boring">use teloxide::prelude::*;
+</span><span class="boring">#[tokio::main]
+</span><span class="boring">async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+</span>pretty_env_logger::init();
+<span class="boring">    let bot = Bot::new(&quot;TOKEN&quot;).auto_send();
+</span><span class="boring">
+</span><span class="boring">teloxide::repl(bot, |message: Message, bot: AutoSend&lt;Bot&gt;| async move {
+</span><span class="boring">    if let Some(text) = message.text() {
+</span><span class="boring">        bot.send_message(message.chat.id, text).await?;
+</span><span class="boring">    }
+</span><span class="boring">}).await;
+</span><span class="boring"> 
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>And that's all! You should be able to see logs:</p>
+<p><img src="./img/ch-03-pic-01.png" alt="Output of RUST_LOG=info cargo run" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sending-requests"><a class="header" href="#sending-requests">Sending requests</a></h1>
+<p>We've already sent simple requests in previous chapters, but we didn't explain how they work.
+In this chapter we'll dive deep into how requests are implemented in teloxide.</p>
+<p>When in previous chapters we've called <code>send_message</code>, the method came from a trait called <a href="https://docs.rs/teloxide/latest/teloxide/requests/trait.Requester.html"><code>Requester</code></a>.
+<a href="https://docs.rs/teloxide/latest/teloxide/requests/trait.Requester.html"><code>Requester</code></a> is a trait that is implemented by <a href="https://docs.rs/teloxide/latest/teloxide/struct.Bot.html"><code>Bot</code></a> (and bot <a href="https://docs.rs/teloxide/latest/teloxide/adaptors/index.html">adaptors</a>, more on that in the next chapter) and is included in the prelude.</p>
+<pre><pre class="playground"><code class="language-rust no_run">use teloxide::prelude::{*, ChatId};
+
+<span class="boring">#[tokio::main]
+</span><span class="boring">async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+</span><span class="boring">    let bot = Bot::new(&quot;TOKEN&quot;).auto_send();
+</span><span class="boring">
+</span><span class="boring">    // replace 0 with your user id
+</span><span class="boring">    let your_id = ChatId(0);
+</span>bot
+    .send_message(your_id, &quot;Hi!&quot;)
+    .await?;   
+<span class="boring"> 
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre></pre>
+<p><code>send_message</code> has optional parameters that can be provided like this:</p>
+<pre><pre class="playground"><code class="language-rust no_run">use teloxide::prelude::*;
+
+<span class="boring">#[tokio::main]
+</span><span class="boring">async fn main() -&gt; Result&lt;(), Box&lt;dyn std::error::Error&gt;&gt; {
+</span><span class="boring">    let bot = Bot::new(&quot;TOKEN&quot;).auto_send();
+</span><span class="boring">
+</span><span class="boring">    // replace 0 with your user id
+</span><span class="boring">    let your_id = ChatId(0);
+</span>bot
+    .send_message(your_id, &quot;Hi!&quot;)
+    .protect_content(true) // &lt;-- optional parameter!
+    .await?;   
+<span class="boring"> 
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span></code></pre></pre>
+<p>Normally you'd also need to call <code>.send()</code> before <code>.await</code>, but <code>.auto_send()</code> on the bot allows you to not do that (more on that later).</p>
+<h2 id="how-it-actually-works"><a class="header" href="#how-it-actually-works">How it actually works</a></h2>
+<p>There are three parts to Telegram methods in teloxide: payloads, requests and requesters.</p>
+<h3 id="payloads"><a class="header" href="#payloads">Payloads</a></h3>
+<p>Requests parameters are stored in plain structures called payloads, for example:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// teloxide::payloads
+pub struct SendMessage {
+    pub chat_id: ChatId,
+    pub text: String,
+    pub parse_mode: Option&lt;ParseMode&gt;, // optional parameters use `Option&lt;_&gt;`
+    pub entities: Option&lt;Vec&lt;MessageEntity&gt;&gt;,
+    pub disable_web_page_preview: Option&lt;bool&gt;,
+    pub disable_notification: Option&lt;bool&gt;,
+    pub protect_content: Option&lt;bool&gt;,
+    pub reply_to_message_id: Option&lt;i32&gt;,
+    pub allow_sending_without_reply: Option&lt;bool&gt;,
+    pub reply_markup: Option&lt;ReplyMarkup&gt;,
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>Such structures implement <a href="https://docs.rs/teloxide/latest/teloxide/requests/trait.Payload.html"><code>Payload</code></a> trait that specifies the name of the method and the return type:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl Payload for SendMessage {
+    type Output = Message;
+    const NAME: &amp;'static str = &quot;SendMessage&quot;
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>For all payloads there is also a <code>&lt;Payload&gt;Setters</code> trait that is implemented for any <code>HasPayload&lt;Payload = &lt;Payload&gt;&gt;</code>.
+<code>*Setters</code> traits add builder-functions that allow to change the payload (like <code>protect_content</code> in the example above).
+All setter traits are reexported &quot;<code>as _</code>&quot; in the prelude, so you don't have to import traits every time you want to use an optional parameter.</p>
+<p><a href="https://docs.rs/teloxide/latest/teloxide/requests/trait.HasPayload.html"><code>HasPayload</code></a> is a trait that just allows to get a <code>&amp;</code> or <code>&amp;mut</code> reference to a payload.
+<a href="https://docs.rs/teloxide/latest/teloxide/requests/trait.HasPayload.html"><code>HasPayload</code></a> is implemented for all payloads and simply returns <code>self</code>.</p>
+<h3 id="requests"><a class="header" href="#requests">Requests</a></h3>
+<p>Requests are types that hold payloads + the information needed to make a telegram request (e.g. bot token).
+Such types implement <a href="https://docs.rs/teloxide/latest/teloxide/requests/trait.Request.html"><code>Request</code></a> trait that looks roughly like this:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait Request: HasPayload {
+    type Err: Error + Send;
+    
+    async fn send(self) -&gt; Result&lt;Output&lt;Self&gt;, Self::Err&gt;;
+
+    // some less important items are left out
+}
+
+pub type Output&lt;T&gt; = &lt;&lt;T as HasPayload&gt;::Payload as Payload&gt;::Output;
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li><a href="https://docs.rs/teloxide/latest/teloxide/requests/trait.Request.html"><code>Request</code></a>s also implement <a href="https://docs.rs/teloxide/latest/teloxide/requests/trait.HasPayload.html"><code>HasPayload</code></a>, so setters work on them too</li>
+<li><code>Err</code> is the type of the error that is returned when the request fails
+<ul>
+<li>It's normally <a href="https://docs.rs/teloxide/latest/teloxide/enum.RequestError.html"><code>RequestError</code></a></li>
+</ul>
+</li>
+<li><code>send</code> sends the request and returns the result</li>
+</ul>
+<h3 id="requester"><a class="header" href="#requester">Requester</a></h3>
+<p>The final piece in this puzzle is the <a href="https://docs.rs/teloxide/latest/teloxide/requests/trait.Requester.html"><code>Requester</code></a> trait that looks roughly like this:</p>
+<pre><pre class="playground"><code class="language-rust no_run">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait Requester {
+    type Err: std::error::Error + Send;
+
+    type SendMessage: Request&lt;Payload = SendMessage, Err = Self::Err&gt;;
+
+    fn send_message&lt;C, T&gt;(&amp;self, chat_id: C, text: T) -&gt; Self::SendMessage
+    where
+        C: Into&lt;ChatId&gt;,
+        T: Into&lt;String&gt;;
+
+    // ~90 other methods
+}
+<span class="boring">}
+</span></code></pre></pre>
+<ul>
+<li><code>send_message</code> (and all other methods) return types implementing <a href="https://docs.rs/teloxide/latest/teloxide/requests/trait.Request.html"><code>Request</code></a> with a matching payload</li>
+<li>All requests return the same error type (<code>Err</code>)</li>
+<li>Some parameter types are auto-converted with <code>Into&lt;&gt;</code>
+<ul>
+<li>This allows to pass <code>i64</code> as <code>ChatId</code> or <code>&amp;str</code> as <code>String</code></li>
+<li>Some parameters are also converted via <code>IntoIterator</code></li>
+</ul>
+</li>
+<li><a href="https://docs.rs/teloxide/latest/teloxide/requests/trait.Requester.html"><code>Requester</code></a> is lazy and only returns builders, but doesn't send requests eagerly</li>
+</ul>
+<p>And that's all you need to know about how requests work in telegram!
+The system is somewhat complicated and convoluted, but in the end it allows for a nice syntax of <code>bot.method(...).optional(...).send().await?</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bot-adaptors"><a class="header" href="#bot-adaptors">Bot adaptors</a></h1>
+<p>Bot adaptors are types that wrap other types that implement <a href="https://docs.rs/teloxide/latest/teloxide/prelude/trait.Requester.html"><code>Requester</code></a> trait and implement <a href="https://docs.rs/teloxide/latest/teloxide/prelude/trait.Requester.html"><code>Requester</code></a> trait themselves.
+This allows to easily add opt-in requester behaviour.</p>
+<p>In this chapter we'll see what adaptors does teloxide provide.</p>
+<h2 id="autosend"><a class="header" href="#autosend"><code>AutoSend</code></a></h2>
+<p>This is probably the most useful adaptor. 
+Its request types implement <code>Future</code>, which allows to use <code>.await</code> directly without using <code>.send()</code>.</p>
+<blockquote>
+<p>Note: <code>AutoSend</code> must be the outermost adaptor, or you won't be able to <code>.await</code> requests directly</p>
+</blockquote>
+<h2 id="defaultparsemode"><a class="header" href="#defaultparsemode"><code>DefaultParseMode</code></a></h2>
+<p>Allows specifying a default parse mode that will be used for all methods that support parse mode.</p>
+<h2 id="cacheme"><a class="header" href="#cacheme"><code>CacheMe</code></a></h2>
+<p>Bots user object rarely changes, so we can cache it.</p>
+<h2 id="trace"><a class="header" href="#trace"><code>Trace</code></a></h2>
+<p>Logs every request, useful for debugging.</p>
+<h2 id="erasedrequester"><a class="header" href="#erasedrequester"><code>ErasedRequester</code></a></h2>
+<p>That one is a little different from other adapters.
+While most adaptors have a generic that represents what they are wrapping, <code>ErasedRequester</code> doesn't.
+<code>ErasedRequester</code> can be created from any type that implements <code>Request</code> and doesn't change behaviour.</p>
+<p>It is useful if you need to store bots with different types in the same variable/array/etc.
+See this example: <a href="https://github.com/teloxide/teloxide-core/blob/d0be26057512764d00b9ed3e3d2237b625b5ae91/examples/erased.rs#L32-L36"><code>core/examples/erased.rs</code></a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="update-dispatching"><a class="header" href="#update-dispatching">Update dispatching</a></h1>
+<p>TODO: write about dispatching2 here</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="appendix"><a class="header" href="#appendix">Appendix</a></h1>
+<p>The following sections contain additional information you may find useful.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="a---teloxide-core"><a class="header" href="#a---teloxide-core">A - teloxide-core</a></h1>
+<p>As you may, or may not have noticed, teloxide consists of two crates -- <code>teloxide</code> (main crate) and <code>teloxide-core</code> (core crate).
+Main crate depends on the core crate and reexports everything from it.</p>
+<p>Core crate contains</p>
+<ul>
+<li>Telegram types (like <code>Update</code>, <code>Message</code>, <code>Chat</code>)</li>
+<li>Everything related to making requests (payloads, requests, requesters)</li>
+<li>Bot adaptors (like <code>AutoSend</code>, <code>ErasedRequester</code>)</li>
+<li>Errors</li>
+</ul>
+<p>i.e. everything that is related to the Telegram Bot API.</p>
+<p>The main crate on the other hand contains</p>
+<ul>
+<li>Reexports of everything from core crate</li>
+<li><code>repl</code>s</li>
+<li>Dispatching systems (that allow you to process updates) </li>
+<li>Update listeners</li>
+<li>Utils to work with formatting</li>
+<li>Utils to work with commands</li>
+</ul>
+<p>i.e. the more high level stuff built on top of the Telegram Bot API.</p>
+<p>Normally you want to use <code>teloxide</code>, but in rare cases when you don't need any high-level APIs, you may use <code>teloxide-core</code> directly.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="b---update-listeners"><a class="header" href="#b---update-listeners">B - Update listeners</a></h1>
+<p>TODO: write this after webhooks PR is merged.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+    </body>
+</html>
