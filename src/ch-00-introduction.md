@@ -1,5 +1,7 @@
 # Introduction
 
+**Note: this book is very much work in progress. Use with caution.**
+
 This book is a user-guide for the [teloxide](https://github.com/teloxide/teloxide) Rust library.
 Teloxide is a full-featured framework that empowers you to easily build Telegram bots using Rust.
 It handles all the difficult stuff so you can focus only on your business logic.
